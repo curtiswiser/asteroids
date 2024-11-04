@@ -5,7 +5,7 @@ import pygame
 class Player(CircleShape):
     def __init__(self, x, y):
         self.rotation = 0
-        super().__init__(x = x, y = y, radius = self.radius)
+        super().__init__(x = x, y = y, radius = PLAYER_RADIUS)
 
     def triangle(self):
         forward = pygame.Vector2(0, 1).rotate(self.rotation)
@@ -17,3 +17,14 @@ class Player(CircleShape):
 
     def draw(self, screen):
         pygame.draw.polygon(screen, color='white', width=2, points=self.triangle())
+
+    def rotate(self, dt):
+        self.rotation +=  PLAYER_TURN_SPEED * dt
+    
+    def update(self, dt):
+        keys = pygame.key.get_pressed()
+
+        if keys[pygame.K_a]:
+            self.rotate(dt = -dt)
+        if keys[pygame.K_d]:
+            self.rotate(dt = dt)

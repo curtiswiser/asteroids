@@ -14,14 +14,16 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return
-            
-        screen.fill("black")
-        player.draw(screen=screen)
+                   
+        milliseconds = clock.tick(60)#this sets the frame rate to 60 fps
+        dt = milliseconds/1000 #converts the value to seconds. used to align the functions to the frame rate
+
+        player.update(dt = dt)#update game object
+        screen.fill("black")#clear screen
+        player.draw(screen=screen) #draw everything
+
         pygame.display.flip()
-        
-        milliseconds = clock.tick(60)
-        dt = milliseconds/1000 #converts the value to seconds
-        
+
 
 if __name__== "__main__":
     main()
